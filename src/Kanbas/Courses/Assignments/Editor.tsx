@@ -1,7 +1,7 @@
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        <label htmlFor="wd-name">Assignment Name</label>
+        <label htmlFor="wd-name"><h3>Assignment Name</h3></label>
         <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
         <textarea id="wd-description">
           The assignment is available online. 
@@ -14,7 +14,7 @@ export default function AssignmentEditor() {
           Excepteur sint occaecat cupidatat non proident, 
           sunt in culpa qui officia deserunt mollit anim id est laborum.
         </textarea>
-        <br />
+        <br /><br />
         <table>
             <tr>
                 <td align="right" valign="top">
@@ -24,6 +24,7 @@ export default function AssignmentEditor() {
                     <input id="wd-points" value={100} />
                 </td>
             </tr>
+            <br />
             <tr>
                 <td align="right" valign="top">
                     <label id="wd-group" htmlFor="wd-wd-group">Assignment Group</label>
@@ -34,7 +35,7 @@ export default function AssignmentEditor() {
                         <option value="Publish Selected">Non-Assignment</option>
                     </select>
                 </td>
-            </tr>
+            </tr><br />
             <tr>
                 <td align="right" valign="top">
                     <label id="wd-display-grade-as" htmlFor="wd-display-grade-as">Display Grade as</label>
@@ -45,7 +46,7 @@ export default function AssignmentEditor() {
                         <option value="Publish Selected">GPA</option>
                     </select>
                 </td>
-            </tr>
+            </tr><br />
             <tr>
                 <td align="right" valign="top">
                     <label id="wd-submission-type" htmlFor="wd-submission-type">Submission Type</label>
@@ -89,7 +90,7 @@ export default function AssignmentEditor() {
                         id="wd-due-date"
                         value="2024-05-13"/><br/>
 
-                    <br /><br />
+                    <br />
                     <tr>
                         <td>
                             <label htmlFor="wd-available-from">Available from</label><br />
@@ -106,16 +107,15 @@ export default function AssignmentEditor() {
                     </tr>
                 </td>
             </tr>
-
-            <hr />
-            
+      </table>
+      <hr />
+        <table align="right">
             <tr >
-                <td></td>
                 <td align="right">
                     <button>Cancel</button>
                     <button>Save</button>
                 </td>
             </tr>
-      </table>
+        </table> 
     </div>
 );}

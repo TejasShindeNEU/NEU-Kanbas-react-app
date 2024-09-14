@@ -9,7 +9,8 @@ export default function Labs() {
         <div id="wd-labs">
 
         <div>
-            <h1>Tejas Adhikari</h1>
+            <h1>Tejas Adhikari (NUID: 002492105)</h1>
+            <h2>Section: 02</h2>
             <h1>Labs</h1>
             <TOC />
             <Routes>
