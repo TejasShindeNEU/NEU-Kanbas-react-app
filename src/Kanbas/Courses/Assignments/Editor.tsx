@@ -3,29 +3,44 @@ import { Link } from "react-router-dom";
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        <label htmlFor="wd-name"><h3>Assignment Name</h3></label>
-        <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
-        <textarea id="wd-description">
-          The assignment is available online. 
-          Submit a link to the landing page of the Course.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-          Excepteur sint occaecat cupidatat non proident, 
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </textarea>
+        <label htmlFor="wd-name"><h5>Assignment Name</h5></label><br />
+        <div className="input-group mb-3">
+            <input id="wd-name" className="form-control" value="A1 - ENV + HTML" /><br /><br />
+        </div>
+        
+        <div className="input-group">
+            <textarea id="wd-description" className="form-control">
+                The assignment is available online. 
+                Submit a link to the landing page of the Course.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, 
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                The assignment is available online. 
+                Submit a link to the landing page of the Course.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, 
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                The assignment is available online. 
+            </textarea>
+        </div>
         <br /><br />
         <table>
-            <tr>
-                <td align="right" valign="top">
+            <div className="d-flex p2 justify-content-between">
+                <div className="flex">
                     <label htmlFor="wd-points">Points</label>
-                </td>
-                <td>
-                    <input id="wd-points" value={100} />
-                </td>
-            </tr>
+                </div>
+                <div className="input-group mb-3">
+                    <input id="wd-points" className="form-control" value={100} />
+                </div>
+            </div>
             <br />
             <tr>
                 <td align="right" valign="top">
