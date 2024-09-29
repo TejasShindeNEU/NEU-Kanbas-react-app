@@ -31,7 +31,7 @@ export default function Dashboard() {
                             <img src="images/coursethumbnail.jpg" width="100%" height={160}/>
                             <div className="card-body">
                                 <h5 className="wd-dashboard-course-title card-title">
-                                    CS5610 Web Development
+                                    CS5610 Web Dev
                                 </h5>
                                 <p className="wd-dashboard-course-title card-text">
                                     Full Stack Web developer
@@ -86,7 +86,7 @@ export default function Dashboard() {
                             <img src="images/coursethumbnail.jpg" width="100%" height={160}/>
                             <div className="card-body">
                                 <h5 className="wd-dashboard-course-title card-title">
-                                    CS5200 Machine Learning
+                                    CS5200 ML
                                 </h5>
                                 <p className="wd-dashboard-course-title card-text">
                                     Machine Learning
@@ -122,10 +122,10 @@ export default function Dashboard() {
                             <img src="images/coursethumbnail.jpg" width="100%" height={160}/>
                             <div className="card-body">
                                 <h5 className="wd-dashboard-course-title card-title">
-                                    CS5330 Pattern Recognition and Computer Vision
+                                    CS5330 PR&CV
                                 </h5>
                                 <p className="wd-dashboard-course-title card-text">
-                                    Pattern Recognition and Computer Vision
+                                    Pattern Recognition & CV
                                 </p>
                                 <button className="btn btn-primary"> Go </button>
                             </div>

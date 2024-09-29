@@ -137,7 +137,7 @@ export default function AssignmentEditor() {
                                 <div>
                                 <input className="form-control" type="date"
                                     id="wd-available-until"
-                                    value="2020-05-20"/>
+                                    value="2024-05-20"/>
                                 </div>
                             </div>
                         </div>
