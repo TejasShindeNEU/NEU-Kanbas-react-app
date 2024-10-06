@@ -85,20 +85,20 @@
       "lessons": [
         {
           "_id": "L101",
-          "name": "History of Rocketry",
-          "description": "A brief history of rocketry and space exploration.",
+          "name": "History of Aerodynamics",
+          "description": "A brief history of Aerodynamics and space exploration.",
           "module": "M101"
         },
         {
           "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
-          "description": "Basic principles of rocket propulsion.",
+          "name": "Aerodynamics Propulsion Fundamentals",
+          "description": "Basic principles of Aerodynamics.",
           "module": "M101"
         },
         {
           "_id": "L103",
-          "name": "Rocket Engine Types",
-          "description": "Overview of different types of rocket engines.",
+          "name": "Rocket Engine Aerodynamics",
+          "description": "Aerodynamics of different types of rocket engines.",
           "module": "M101"
         }
       ]
@@ -110,22 +110,22 @@
       "course": "RS102",
       "lessons": [
         {
-          "_id": "L101",
-          "name": "History of Rocketry",
-          "description": "A brief history of rocketry and space exploration.",
-          "module": "M101"
+          "_id": "L201",
+          "name": "Rocket Aerodynamics",
+          "description": "Overview of different types of rocket fuels.",
+          "module": "M102"
         },
         {
-          "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
-          "description": "Basic principles of rocket propulsion.",
-          "module": "M101"
+          "_id": "L202",
+          "name": "Aerodynamics of Combustion Processes",
+          "description": "Understanding combustion processes and efficiency.",
+          "module": "M102"
         },
         {
-          "_id": "L103",
-          "name": "Rocket Engine Types",
-          "description": "Overview of different types of rocket engines.",
-          "module": "M101"
+          "_id": "L203",
+          "name": "Combustion Instability in Aerodynamics",
+          "description": "Understanding combustion instability and mitigation.",
+          "module": "M102"
         }
       ]
     },
@@ -136,20 +136,20 @@
       "course": "RS102",
       "lessons": [
         {
-          "_id": "L101",
-          "name": "History of Rocketry",
+          "_id": "L301",
+          "name": "Aerodynamics of Rocketry",
           "description": "A brief history of rocketry and space exploration.",
           "module": "M101"
         },
         {
-          "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
+          "_id": "L302",
+          "name": "Rocket Aerodynamics Fundamentals",
           "description": "Basic principles of rocket propulsion.",
           "module": "M101"
         },
         {
-          "_id": "L103",
-          "name": "Rocket Engine Types",
+          "_id": "L303",
+          "name": "Rocket Aerodynamics Types",
           "description": "Overview of different types of rocket engines.",
           "module": "M101"
         }
@@ -163,21 +163,21 @@
       "lessons": [
         {
           "_id": "L101",
-          "name": "History of Rocketry",
+          "name": "History of Spacecraft",
           "description": "A brief history of rocketry and space exploration.",
-          "module": "M101"
+          "module": "M301"
         },
         {
           "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
+          "name": "Spacecraft Propulsion Fundamentals",
           "description": "Basic principles of rocket propulsion.",
-          "module": "M101"
+          "module": "M301"
         },
         {
           "_id": "L103",
-          "name": "Rocket Engine Types",
+          "name": "Spacecraft Engine Types",
           "description": "Overview of different types of rocket engines.",
-          "module": "M101"
+          "module": "M301"
         }
       ]
     },
@@ -188,22 +188,22 @@
       "course": "RS103",
       "lessons": [
         {
-          "_id": "L101",
-          "name": "History of Rocketry",
+          "_id": "L201",
+          "name": "History of Orbits",
           "description": "A brief history of rocketry and space exploration.",
-          "module": "M101"
+          "module": "M302"
         },
         {
-          "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
+          "_id": "L202",
+          "name": "Spacecraft Propulsion Fundamentals",
           "description": "Basic principles of rocket propulsion.",
-          "module": "M101"
+          "module": "M302"
         },
         {
-          "_id": "L103",
-          "name": "Rocket Engine Types",
+          "_id": "L203",
+          "name": "Spacecraft Engine Types",
           "description": "Overview of different types of rocket engines.",
-          "module": "M101"
+          "module": "M302"
         }
       ]
     },
@@ -214,22 +214,101 @@
       "course": "RS103",
       "lessons": [
         {
-          "_id": "L101",
-          "name": "History of Rocketry",
+          "_id": "L301",
+          "name": "Spacecrafts",
           "description": "A brief history of rocketry and space exploration.",
-          "module": "M101"
+          "module": "M303"
+        },
+        {
+          "_id": "L302",
+          "name": "Rockets and Spacecraft",
+          "description": "Basic principles of rocket propulsion.",
+          "module": "M303"
+        },
+        {
+          "_id": "L303",
+          "name": "Spacecraft Engine Types",
+          "description": "Overview of different types of rocket engines.",
+          "module": "M303"
+        }
+      ]
+    },
+
+    {
+      "_id": "M401",
+      "name": "Fundamentals of Organic Chemistry",
+      "description": "Basic aerodynamic concepts and fluid dynamics principles.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "History of Organic Chemistry",
+          "description": "A brief history of Aerodynamics and space exploration.",
+          "module": "M401"
         },
         {
           "_id": "L102",
-          "name": "Rocket Propulsion Fundamentals",
-          "description": "Basic principles of rocket propulsion.",
-          "module": "M101"
+          "name": "Organic Chemistry Fundamentals",
+          "description": "Basic principles of Aerodynamics.",
+          "module": "M401"
         },
         {
           "_id": "L103",
-          "name": "Rocket Engine Types",
+          "name": "Rocket Engine Organic Chemistry",
+          "description": "Aerodynamics of different types of rocket engines.",
+          "module": "M401"
+        }
+      ]
+    },
+    {
+      "_id": "M402",
+      "name": "Organic Chemistry Flow",
+      "description": "Understanding subsonic and supersonic aerodynamic behaviors.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Rocket Organic Chemistry",
+          "description": "Overview of different types of rocket fuels.",
+          "module": "M402"
+        },
+        {
+          "_id": "L202",
+          "name": "Organic Chemistry of Combustion Processes",
+          "description": "Understanding combustion processes and efficiency.",
+          "module": "M402"
+        },
+        {
+          "_id": "L203",
+          "name": "Combustion Instability in Organic Chemistry",
+          "description": "Understanding combustion instability and mitigation.",
+          "module": "M402"
+        }
+      ]
+    },
+    {
+      "_id": "M403",
+      "name": "Aerodynamic Heating",
+      "description": "Study of aerodynamic heating and thermal protection systems.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Aerodynamics of Rocketry",
+          "description": "A brief history of rocketry and space exploration.",
+          "module": "M403"
+        },
+        {
+          "_id": "L302",
+          "name": "Rocket Aerodynamics Fundamentals",
+          "description": "Basic principles of rocket propulsion.",
+          "module": "M403"
+        },
+        {
+          "_id": "L303",
+          "name": "Rocket Aerodynamics Types",
           "description": "Overview of different types of rocket engines.",
-          "module": "M101"
+          "module": "M403"
         }
       ]
     }
