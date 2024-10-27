@@ -7,14 +7,14 @@ import { FaRegEdit } from "react-icons/fa";
 import AssignmentControls from "./AssignmentControls";
 import { useParams, useLocation } from "react-router";
 import * as db from "../../Database";
-
+import ProtectedEdit from "../../Account/ProtectedEdit";
 
 export default function Assignments() {
   const { cid } = useParams();
   const assignment = db.assignments;
     return (
       <div id="wd-assignments">
-        <AssignmentControls /> <br /><br /><br /><br />
+        <ProtectedEdit><AssignmentControls /></ProtectedEdit> <br /><br /><br /><br />
 
         <ul id="wd-assignment-list" className="list-group rounded-0">
           <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
