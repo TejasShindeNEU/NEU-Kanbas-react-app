@@ -3,17 +3,36 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as db from "./Database";
 import ProtectedEdit from "./Account/ProtectedEdit";
+import ProtectedRouteStudent from "./Account/ProtectedRouteStudent";
 
 export default function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, updateCourse }: {
         courses: any[]; course: any; setCourse: (course: any) => void;
         addNewCourse: () => void; deleteCourse: (course: any) => void;
         updateCourse: () => void; }) {
     
+    const [showAllCourses, setShowAllCourses] = useState(false);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const { enrollments } = db;
+    // const { enrollme+++nts } = useSelector((state: any) => state.enrollmentReducer);
+
+    const enrolledCourses = courses.filter((course) => enrollments.some(
+        (enrollment) => enrollment.user === currentUser._id && enrollment.course === course._id
+      ));
+    
+    const displayedCourses = showAllCourses ? courses : enrolledCourses;
     return (
         <div id="wd-dashboard">
-        <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+        <h1 id="wd-dashboard-title">Dashboard
+            <ProtectedRouteStudent>
+                <button className="btn btn-primary float-end"
+                id="wd-enrollments-click" 
+                onClick={() => setShowAllCourses(!showAllCourses)}>
+                  {showAllCourses ? "Back" : "Enrollments"}
+                </button>
+            </ProtectedRouteStudent>
+        </h1> 
+        
+        <hr />
         <ProtectedEdit>
             <h5>New Course
                 <button className="btn btn-primary float-end"
@@ -30,12 +49,11 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
                 onChange={(e) => setCourse({ ...course, description: e.target.value }) }/>
             <hr />
         </ProtectedEdit>
-        <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+        
+        <h2 id="wd-dashboard-published">Published Courses ({displayedCourses.length})</h2> <hr />
         <div id="wd-dashboard-courses" className="row">
             <div className="row row-cols-1 row-cols-md-5 g-4">
-            {courses.filter((course) => enrollments.some(
-                (enrollment) => enrollment.user === currentUser._id &&
-                enrollment.course === course._id)).map((course) => (
+            {displayedCourses.map((course) => (
                 <div className="wd-dashboard-course col" style={{ width: "270px" }}>
                 <div className="card rounded-3 overflow-hidden">
                     <Link to={`/Kanbas/Courses/${course._id}/Home`}

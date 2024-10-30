@@ -22,11 +22,6 @@ export default function Assignments() {
 
   const dispatch = useDispatch();
 
-  
-  // const deleteAssignment = (assignmentId: string) => {
-  //   setAssignments(assignments.filter((a) => a._id !== assignmentId));
-  // };
-
 
     return (
       <div id="wd-assignments">
@@ -46,8 +41,8 @@ export default function Assignments() {
                   title: assignmentName,
                   description: assignmentDesc,
                   points: assignmentPoints,
-                  due_date: assignmentDue,
-                  available_date: assignmentFrom,
+                  due_date_num: assignmentDue,
+                  available_date_num: assignmentFrom,
                   course: cid,
                 }));
                 setAssignmentName("");
@@ -85,10 +80,10 @@ export default function Assignments() {
                             Multiple module 
                           </div>
                           <div className="wd-float-left me-1"> 
-                            | <b>Not available until</b> {assignment.available_date} at 12:00 am | <br /> 
+                            | <b>Not available until</b> {assignment.available_date_num} at 12:00 am | <br /> 
                           </div >
                           <div className="wd-float-left me-1">
-                            <b>Due</b> {assignment.due_date} at 11:59pm | {assignment.points} pts
+                            <b>Due</b> {assignment.due_date_num} at 11:59pm | {assignment.points} pts
                           </div>  
                         </div>
                         <div className="align-self-center">
