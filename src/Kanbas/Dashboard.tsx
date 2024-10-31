@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as db from "./Database";
+import { enrollCourse, unenrollCourse } from "./enrollmentReducer";
 import ProtectedEdit from "./Account/ProtectedEdit";
 import ProtectedRouteStudent from "./Account/ProtectedRouteStudent";
 
@@ -12,13 +13,16 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
     
     const [showAllCourses, setShowAllCourses] = useState(false);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const { enrollments } = db;
-    // const { enrollme+++nts } = useSelector((state: any) => state.enrollmentReducer);
-
-    const enrolledCourses = courses.filter((course) => enrollments.some(
-        (enrollment) => enrollment.user === currentUser._id && enrollment.course === course._id
+    const { enrollments } = useSelector((state: any) => state.enrollmentReducer); 
+        
+    // console.log(typeof enrollments);
+    
+    const enrolledCourses = courses.filter((course: any) => enrollments.some(
+        (enrollment: any) => enrollment.user === currentUser._id && enrollment.course === course._id
       ));
     
+      const dispatch = useDispatch();
+
     const displayedCourses = showAllCourses ? courses : enrolledCourses;
     return (
         <div id="wd-dashboard">
@@ -56,7 +60,11 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
             {displayedCourses.map((course) => (
                 <div className="wd-dashboard-course col" style={{ width: "270px" }}>
                 <div className="card rounded-3 overflow-hidden">
-                    <Link to={`/Kanbas/Courses/${course._id}/Home`}
+                    <Link to={enrollments.some(
+                                (enrollment: any) =>
+                                    enrollment.user === currentUser._id 
+                                    && enrollment.course === course._id
+                                ) ? (`/Kanbas/Courses/${course._id}/Home`) : ("/Kanbas/Dashboard")}
                         className="wd-dashboard-course-link text-decoration-none text-dark" >
                         <img src={`/images/${course._id}.jpg`} width="100%" height={160} 
                             onError={(e) => {
@@ -72,8 +80,9 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
                             <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
                             {course.description}
                             </p>
-                            <button className="btn btn-primary"> Go </button>
+                            
                             <ProtectedEdit>
+                                <button className="btn btn-primary"> Go </button>
                                 <button onClick={(event) => {
                                     event.preventDefault();
                                     deleteCourse(course._id);
@@ -90,6 +99,42 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
                                     Edit
                                 </button>
                             </ProtectedEdit>
+
+                            <ProtectedRouteStudent>
+                                {enrollments.some(
+                                (enrollment: any) =>
+                                    enrollment.user === currentUser._id && enrollment.course === course._id
+                                ) ? (
+                                <div>
+                                    <button className="btn btn-primary"> Go </button>
+                                    <button
+                                        className="btn btn-danger ms-1 float-end"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            dispatch(unenrollCourse({ 
+                                                user: currentUser._id, 
+                                                course: course._id 
+                                            }))
+                                        }}
+                                    >
+                                        Unenroll
+                                    </button>
+                                </div>
+                                ) : (
+                                <button
+                                    className="btn btn-success ms-1 float-end"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        dispatch(enrollCourse({ 
+                                            user: currentUser._id, 
+                                            course: course._id 
+                                        }))
+                                    }}
+                                >
+                                    Enroll
+                                </button>
+                                )}
+                            </ProtectedRouteStudent>
                         </div>
                     </Link>
                 </div>

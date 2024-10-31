@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Assignments() {
   const { cid } = useParams();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [assignmentName, setAssignmentName] = useState("");
   const [assignmentDesc, setAssignmentDesc] = useState("");
   const [assignmentPoints, setAssignmentPoints] = useState("");
@@ -25,33 +26,9 @@ export default function Assignments() {
 
     return (
       <div id="wd-assignments">
-        <ProtectedEdit><AssignmentControls 
-              setAssignmentName={setAssignmentName}
-              setAssignmentDesc={setAssignmentDesc}
-              setAssignmentPoints={setAssignmentPoints}
-              setAssignmentDue={setAssignmentDue}
-              setAssignmentFrom={setAssignmentFrom}
-              assignmentName={assignmentName} 
-              assignmentDesc={assignmentDesc}
-              assignmentPoints={assignmentPoints}
-              assignmentDue={assignmentDue}
-              assignmentFrom={assignmentFrom}
-              addAssignment={() => {
-                dispatch(addAssignment({ 
-                  title: assignmentName,
-                  description: assignmentDesc,
-                  points: assignmentPoints,
-                  due_date_num: assignmentDue,
-                  available_date_num: assignmentFrom,
-                  course: cid,
-                }));
-                setAssignmentName("");
-                setAssignmentDesc("");
-                setAssignmentPoints("");
-                setAssignmentDue("");
-                setAssignmentFrom("");
-              }}/>
-          </ProtectedEdit> 
+        <ProtectedEdit>
+          <AssignmentControls/>
+        </ProtectedEdit> 
         <br /><br /><br /><br />
 
         <ul id="wd-assignment-list" className="list-group rounded-0">
@@ -73,7 +50,8 @@ export default function Assignments() {
                         </div>
                         <div className="align-self-center flex-grow-1">
                           <a className="wd-assignment-link"
-                            href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                            href={currentUser.role === "FACULTY" ? `#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`
+                              : `#/Kanbas/Courses/${cid}/Assignments/`}>
                             {assignment.title}
                           </a><br />
                           <div className="wd-float-left text-danger me-1">
