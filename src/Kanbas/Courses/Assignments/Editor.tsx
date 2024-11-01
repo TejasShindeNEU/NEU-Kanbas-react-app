@@ -11,12 +11,28 @@ export default function AssignmentEditor() {
     // Set up local state for form inputs
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     const assignment = assignments.find((assignment: any) => assignment._id === aid);
-    const [assignmentName, setAssignmentName] = useState(assignment.title);
-    const [assignmentDesc, setAssignmentDesc] = useState(assignment.description);
-    const [assignmentPoints, setAssignmentPoints] = useState(assignment.points);
-    const [assignmentDue, setAssignmentDue] = useState(assignment.due_date_num);
-    const [assignmentFrom, setAssignmentFrom] = useState(assignment.available_date_num);
+    const [assignmentName, setAssignmentName] = useState("");
+    const [assignmentDesc, setAssignmentDesc] = useState("");
+    const [assignmentPoints, setAssignmentPoints] = useState("");
+    const [assignmentDue, setAssignmentDue] = useState("");
+    const [assignmentFrom, setAssignmentFrom] = useState("");
+    // const [assignmentName, setAssignmentName] = useState(assignment.title);
+    // const [assignmentDesc, setAssignmentDesc] = useState(assignment.description);
+    // const [assignmentPoints, setAssignmentPoints] = useState(assignment.points);
+    // const [assignmentDue, setAssignmentDue] = useState(assignment.due_date_num);
+    // const [assignmentFrom, setAssignmentFrom] = useState(assignment.available_date_num);
     
+    
+    useEffect(() => {
+        if(aid !== "new"){
+            setAssignmentName(assignment.title);
+            setAssignmentDesc(assignment.description);
+            setAssignmentPoints(assignment.points);
+            setAssignmentFrom(assignment.available_date_num);
+            setAssignmentDue(assignment.due_date_num);
+        }
+    }, [assignment]);
+
     const dispatch = useDispatch();
 
     return (
@@ -30,9 +46,8 @@ export default function AssignmentEditor() {
                 
         
                 <div className="input-group mb-4">
-                    <textarea id="wd-description" className="form-control" onChange={(e) => setAssignmentDesc(e.target.value)}>
-                        {assignmentDesc}
-                    </textarea>
+                    <textarea id="wd-description" className="form-control" defaultValue={assignmentDesc}
+                        onChange={(e) => setAssignmentDesc(e.target.value)} />
                 </div>
                 
         
@@ -49,7 +64,8 @@ export default function AssignmentEditor() {
                             </div> 
                         </div>
 
-
+                        {(aid !== "new") ? (
+                        <div>
                         <div className="row mb-3">
                             <label htmlFor="wd-group" className="text-end col-sm-3 col-form-label">
                                 Assignment Group
@@ -112,6 +128,7 @@ export default function AssignmentEditor() {
                                 </div>
                             </div>
                         </div>
+                        </div>) : (<div></div>)}
 
 
                         <div className="row mb-3">
@@ -120,10 +137,13 @@ export default function AssignmentEditor() {
                                 Assign
                             </label>
                             <div className="col-sm-9 border">
+                                {(aid !== "new") ? (
+                                <div>
                                 <label htmlFor="wd-assign-to" className="mt-3">
                                     <h5>Assign to</h5>
                                 </label>
                                 <input className="form-control mb-4" id="wd-assign-to" value={"Everyone"} />
+                                </div>) : (<div> </div>)}
 
                                 <label id="wd-due-date" htmlFor="wd-assign-to"> Due </label>
                                 <input className="form-control mb-4" type="date"
@@ -165,20 +185,36 @@ export default function AssignmentEditor() {
                     </button>
                 </Link>
                 <Link to="./..">
-                    <button className="btn btn-danger" onClick={() => {
-                            dispatch(updateAssignment({ 
-                                _id: aid, 
-                                title: assignmentName,
-                                description: assignmentDesc,
-                                points: assignmentPoints,
-                                due_date_num: assignmentDue,
-                                available_date_num: assignmentFrom,
-                                course: cid
-                             }));
-                        }}
-                        id={`wd-update-${aid}-click`}>
-                        Save
-                    </button>
+                    {(aid !== "new") ? (
+                        <button className="btn btn-danger" onClick={() => {
+                                dispatch(updateAssignment({ 
+                                    _id: aid, 
+                                    title: assignmentName,
+                                    description: assignmentDesc,
+                                    points: assignmentPoints,
+                                    due_date_num: assignmentDue,
+                                    available_date_num: assignmentFrom,
+                                    course: cid
+                                }));
+                            }}
+                            id={`wd-update-${aid}-click`}>
+                            Save
+                        </button>) : (
+                        <button className="btn btn-danger" onClick={() => {
+                                dispatch(addAssignment({ 
+                                    _id: aid, 
+                                    title: assignmentName,
+                                    description: assignmentDesc,
+                                    points: assignmentPoints,
+                                    due_date_num: assignmentDue,
+                                    available_date_num: assignmentFrom,
+                                    course: cid
+                                }));
+                            }}
+                            id={`wd-update-${aid}-click`}>
+                            Save
+                        </button>)
+                    }
                 </Link>
             </div>
         </ProtectedEdit>
