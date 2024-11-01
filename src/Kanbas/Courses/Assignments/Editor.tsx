@@ -18,57 +18,6 @@ export default function AssignmentEditor() {
     const [assignmentFrom, setAssignmentFrom] = useState(assignment.available_date_num);
     
     const dispatch = useDispatch();
-    
-    // // Find the assignment by ID
-    // let assignment = [{_id: "new",
-    //     title: "", 
-    //     description: "",
-    //     available_date_num: "",
-    //     available_time: "",
-    //     due_date: "",
-    //     due_date_num: "",
-    //     due_time: "",
-    //     points: ""
-    // }];
-    // console.log(assignment[0].title);
-    // if(aid !== "new"){
-        // const assignment = assignments.find((assignment: any) => assignment._id === aid);
-        // setAssignmentName(assignment.title);
-        // setAssignmentDesc(assignment.description);
-    // }
-    
-
-    // useEffect(() => {
-    //     const assignment = assignments.find((assignment: any) => assignment._id === aid);
-    //     if (assignment) {
-    //       setAssignmentData({
-    //         title: assignment.title,
-    //         description: assignment.description,
-    //         points: assignment.points,
-    //         due_date_num: assignment.due_date_num,
-    //         available_date_num: assignment.available_date_num,
-    //       });
-    //     }
-    // }, [assignments, aid]);
-
-    // // Handle form input changes
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    //     setAssignmentData({
-    //         ...assignmentData,
-    //         [e.target.id]: e.target.value,
-    //     });
-    // };
-
-    // useEffect(() => {
-    //     // If the assignment changes, sync local state (necessary when switching between assignments)
-    //     if (assignment) {
-    //         setAssignmentName(assignment.title);
-    //         setAssignmentDesc(assignment.description);
-    //         setAssignmentPoints(assignment.points);
-    //         setAssignmentDue(assignment.due_date_num);
-    //         setAssignmentFrom(assignment.available_date_num)
-    //     }
-    // }, [assignment]);
 
     return (
       <div id="wd-assignments-editor">

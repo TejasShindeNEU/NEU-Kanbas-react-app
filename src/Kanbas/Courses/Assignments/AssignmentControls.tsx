@@ -1,7 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import "./styles.css";
-import AssignmentEditor from "./AssignmentEditor";
 import { useParams, useLocation } from "react-router";
 
 
