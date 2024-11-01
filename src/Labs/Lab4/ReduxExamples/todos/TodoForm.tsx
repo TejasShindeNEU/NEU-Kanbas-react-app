@@ -8,7 +8,7 @@ export default function TodoForm() {
       <li className="list-group-item">
         <div className="row g-3">
             <div className="col-auto">
-                <input className="form-control" defaultValue={todo.title}
+                <input className="form-control" value={todo.title}
                 onChange={ (e) => dispatch(setTodo({ ...todo, title: e.target.value })) }/>
             </div>
             <div className="col-auto">
