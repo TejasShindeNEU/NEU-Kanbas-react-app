@@ -1,18 +1,3 @@
-// import { Link } from "react-router-dom";
-// import { useLocation } from "react-router";
-
-// export default function TOC() {
-//     return (
-//       <ul className="nav nav-pills">
-//         <li className="nav-item"><Link to="/Labs">Labs</Link></li>
-//         <li className="nav-item"><Link to="/Labs/Lab1">Lab 1</Link></li>
-//         <li className="nav-item"><Link to="/Labs/Lab2">Lab 2</Link></li>
-//         <li className="nav-item"><Link to="/Labs/Lab3">Lab 3</Link></li>
-//         <li className="nav-item"><Link to="/Kanbas">Kanbas</Link></li>
-//         <li className="nav-item"><a href="https://github.com/TejasAdhikari/kanbas-react-web-app" id="wd-github" target="_blank">GitHub</a><br/></li>
-//       </ul>
-//     );
-//   }
 
 
 import { useLocation } from "react-router";
@@ -47,6 +32,12 @@ export default function TOC() {
         <a id="wd-a4" href="#/Labs/Lab4"
           className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}>
           Lab 4
+        </a>
+      </li>
+      <li className="nav-item">
+        <a id="wd-a5" href="#/Labs/Lab5"
+          className={`nav-link ${pathname.includes("Lab5") ? "active" : ""}`}>
+          Lab 5
         </a>
       </li>
       <li className="nav-item">
