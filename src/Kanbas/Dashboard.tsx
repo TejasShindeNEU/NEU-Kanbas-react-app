@@ -17,13 +17,14 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
         
     // console.log(typeof enrollments);
     
-    const enrolledCourses = courses.filter((course: any) => enrollments.some(
-        (enrollment: any) => enrollment.user === currentUser._id && enrollment.course === course._id
-      ));
+    // const enrolledCourses = courses.filter((course: any) => enrollments.some(
+    //     (enrollment: any) => enrollment.user === currentUser._id && enrollment.course === course._id
+    //   ));
     
       const dispatch = useDispatch();
 
-    const displayedCourses = showAllCourses ? courses : enrolledCourses;
+    const displayedCourses = showAllCourses ? db.courses : courses;
+    // const displayedCourses = courses;
     return (
         <div id="wd-dashboard">
         <h1 id="wd-dashboard-title">Dashboard
