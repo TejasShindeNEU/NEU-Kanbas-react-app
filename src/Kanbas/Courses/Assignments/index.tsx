@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsGripVertical } from "react-icons/bs";
 import SingleAssignmentControlButtons from "./SingleAssignmentControlButton";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -8,8 +8,10 @@ import AssignmentControls from "./AssignmentControls";
 import { useParams, useLocation } from "react-router";
 import * as db from "../../Database";
 import ProtectedEdit from "../../Account/ProtectedEdit";
-import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./reducer";
+import { setAssignments, addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -23,6 +25,19 @@ export default function Assignments() {
 
   const dispatch = useDispatch();
 
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
     return (
       <div id="wd-assignments">
@@ -40,7 +55,6 @@ export default function Assignments() {
               <AssignmentControlButtons />
             </div>
             {assignments
-                .filter((assignment: any) => assignment.course === cid)
                 .map((assignment: any) => (
                     <li className="wd-lesson list-group-item p-3 ps-1">
                       <div className="d-flex">
@@ -67,9 +81,7 @@ export default function Assignments() {
                         <div className="align-self-center">
                           <SingleAssignmentControlButtons 
                             assignmentId={assignment._id}
-                            deleteAssignment={(assignmentId) => {
-                              dispatch(deleteAssignment(assignmentId));
-                            }}/>
+                            deleteAssignment={(assignmentId) => removeAssignment(assignmentId)}/>
                         </div>
                       </div>
                   </li>

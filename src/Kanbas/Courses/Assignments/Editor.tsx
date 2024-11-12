@@ -2,8 +2,10 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as db from "../../Database"
 import ProtectedEdit from "../../Account/ProtectedEdit";
-import { addAssignment, editAssignment, updateAssignment, deleteAssignment } from "./reducer";
+import { addAssignment, updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux"; 
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
@@ -16,11 +18,34 @@ export default function AssignmentEditor() {
     const [assignmentPoints, setAssignmentPoints] = useState("");
     const [assignmentDue, setAssignmentDue] = useState("");
     const [assignmentFrom, setAssignmentFrom] = useState("");
-    // const [assignmentName, setAssignmentName] = useState(assignment.title);
-    // const [assignmentDesc, setAssignmentDesc] = useState(assignment.description);
-    // const [assignmentPoints, setAssignmentPoints] = useState(assignment.points);
-    // const [assignmentDue, setAssignmentDue] = useState(assignment.due_date_num);
-    // const [assignmentFrom, setAssignmentFrom] = useState(assignment.available_date_num);
+    
+    const createAssignmentForCourse = async () => {
+        if (!cid) return;
+        const newAssignment = { 
+            title: assignmentName,
+            description: assignmentDesc,
+            points: assignmentPoints,
+            due_date_num: assignmentDue,
+            available_date_num: assignmentFrom,
+            course: cid 
+        };
+        const assignment = await coursesClient.createAssignmentForCourse(cid, newAssignment);
+        dispatch(addAssignment(assignment));
+    };
+    
+    const saveAssignment = async () => {
+        const updatedAssignment = { 
+            _id: aid,
+            title: assignmentName,
+            description: assignmentDesc,
+            points: assignmentPoints,
+            due_date_num: assignmentDue,
+            available_date_num: assignmentFrom,
+            course: cid 
+        };
+        await assignmentsClient.updateAssignment(updatedAssignment);
+        dispatch(updateAssignment(updatedAssignment));
+    };
     
     
     useEffect(() => {
@@ -186,31 +211,11 @@ export default function AssignmentEditor() {
                 </Link>
                 <Link to="./..">
                     {(aid !== "new") ? (
-                        <button className="btn btn-danger" onClick={() => {
-                                dispatch(updateAssignment({ 
-                                    _id: aid, 
-                                    title: assignmentName,
-                                    description: assignmentDesc,
-                                    points: assignmentPoints,
-                                    due_date_num: assignmentDue,
-                                    available_date_num: assignmentFrom,
-                                    course: cid
-                                }));
-                            }}
+                        <button className="btn btn-danger" onClick={saveAssignment}
                             id={`wd-update-${aid}-click`}>
                             Save
                         </button>) : (
-                        <button className="btn btn-danger" onClick={() => {
-                                dispatch(addAssignment({ 
-                                    _id: aid, 
-                                    title: assignmentName,
-                                    description: assignmentDesc,
-                                    points: assignmentPoints,
-                                    due_date_num: assignmentDue,
-                                    available_date_num: assignmentFrom,
-                                    course: cid
-                                }));
-                            }}
+                        <button className="btn btn-danger" onClick={createAssignmentForCourse}
                             id={`wd-update-${aid}-click`}>
                             Save
                         </button>)
