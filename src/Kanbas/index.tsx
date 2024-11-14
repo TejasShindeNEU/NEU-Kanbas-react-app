@@ -14,6 +14,7 @@ import * as courseClient from "./Courses/client";
 
 
 export default function Kanbas() {
+  const [allCourses, setAllCourses] =  useState<any[]>([]);
   const [courses, setCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const fetchCourses = async () => {
@@ -24,10 +25,20 @@ export default function Kanbas() {
       console.error(error);
     }
     setCourses(courses);
+
+    let allCourses = [];
+    try {
+      allCourses = await courseClient.fetchAllCourses();
+    } catch (error) {
+      console.error(error);
+    }
+    setAllCourses(allCourses);
   };
   
   useEffect(() => {
     fetchCourses();
+    console.log(courses);
+    console.log(allCourses);
   }, [currentUser]);
 
   const [course, setCourse] = useState<any>({
@@ -67,6 +78,9 @@ export default function Kanbas() {
                 <ProtectedRoute>
                   <Dashboard
                     courses={courses}
+                    setCourses={setCourses}
+                    allCourses={allCourses}
+                    setAllCourses={setAllCourses}
                     course={course}
                     setCourse={setCourse}
                     addNewCourse={addNewCourse}

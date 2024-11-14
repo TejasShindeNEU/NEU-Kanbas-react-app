@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as db from "./Database";
-import { enrollCourse, unenrollCourse } from "./enrollmentReducer";
+import { enrollCourse, unenrollCourse, setEnrollments } from "./enrollmentReducer";
 import ProtectedEdit from "./Account/ProtectedEdit";
 import ProtectedRouteStudent from "./Account/ProtectedRouteStudent";
+import * as enrollmentClient from "./enrollmentClient";
 
-export default function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, updateCourse }: {
-        courses: any[]; course: any; setCourse: (course: any) => void;
+export default function Dashboard({ courses, setCourses, allCourses, setAllCourses,
+        course, setCourse, addNewCourse, deleteCourse, updateCourse }: {
+        courses: any[]; allCourses: any[]; course: any; 
+        setCourses: (courses: any) => void; 
+        setAllCourses: (allCourses: any) => void;
+        setCourse: (course: any) => void;
         addNewCourse: () => void; deleteCourse: (course: any) => void;
         updateCourse: () => void; }) {
     
     const [showAllCourses, setShowAllCourses] = useState(false);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const { enrollments } = useSelector((state: any) => state.enrollmentReducer); 
+    // const { enrollments } = useSelector((state: any) => state.enrollmentReducer); 
         
     // console.log(typeof enrollments);
     
@@ -21,9 +26,33 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
     //     (enrollment: any) => enrollment.user === currentUser._id && enrollment.course === course._id
     //   ));
     
-      const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    const displayedCourses = showAllCourses ? db.courses : courses;
+    
+    // enrolled course and All courses
+    
+    useEffect(() => {
+        dispatch(setEnrollments(courses));
+    }, []);
+    
+
+    const enrollUserInCourse = async (courseId: any) => {
+        console.log(currentUser._id);
+        const newCourses = await enrollmentClient.enrollInCourse(currentUser._id, courseId);
+        // console.log("Dashboard courses response: ", newCourses);
+        dispatch(enrollCourse({user: currentUser._id, course: courseId}));
+        setCourses(newCourses);
+    };
+
+    const unEnrollUseFromCourse = async (courseId: any) => {
+        console.log(currentUser._id);
+        const newCourses = await enrollmentClient.unEnrollFromCourse(currentUser._id, courseId);
+        // console.log("Dashboard courses response: ", newCourses);
+        dispatch(unenrollCourse({user: currentUser._id, course: courseId}));
+        setCourses(newCourses);
+    };
+    
+    const displayedCourses = showAllCourses ? allCourses : courses;
     // const displayedCourses = courses;
     return (
         <div id="wd-dashboard">
@@ -61,11 +90,9 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
             {displayedCourses.map((course) => (
                 <div className="wd-dashboard-course col" style={{ width: "270px" }}>
                 <div className="card rounded-3 overflow-hidden">
-                    <Link to={enrollments.some(
-                                (enrollment: any) =>
-                                    enrollment.user === currentUser._id 
-                                    && enrollment.course === course._id
-                                ) ? (`/Kanbas/Courses/${course._id}/Home`) : ("/Kanbas/Dashboard")}
+                    <Link to={courses.some(
+                                (c: any) =>
+                                    c._id === course._id ) ? (`/Kanbas/Courses/${course._id}/Home`) : ("/Kanbas/Dashboard")}
                         className="wd-dashboard-course-link text-decoration-none text-dark" >
                         <img src={`/images/${course._id}.jpg`} width="100%" height={160} 
                             onError={(e) => {
@@ -102,38 +129,35 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
                             </ProtectedEdit>
 
                             <ProtectedRouteStudent>
-                                {enrollments.some(
-                                (enrollment: any) =>
-                                    enrollment.user === currentUser._id && enrollment.course === course._id
-                                ) ? (
-                                <div>
-                                    <button className="btn btn-primary"> Go </button>
+                                {courses.some(
+                                    (c: any) =>
+                                        c._id === course._id ) ? (
+                                    <div>
+                                        <button className="btn btn-primary"> Go </button>
+                                        <button
+                                            className="btn btn-danger ms-1 float-end"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                unEnrollUseFromCourse(course._id);
+                                                // dispatch(unenrollCourse({ 
+                                                //     user: currentUser._id, 
+                                                //     course: course._id 
+                                                // }))
+                                            }}
+                                        >
+                                            Unenroll
+                                        </button>
+                                    </div>
+                                    ) : (
                                     <button
-                                        className="btn btn-danger ms-1 float-end"
+                                        className="btn btn-success ms-1 float-end"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            dispatch(unenrollCourse({ 
-                                                user: currentUser._id, 
-                                                course: course._id 
-                                            }))
+                                            enrollUserInCourse(course._id);
                                         }}
                                     >
-                                        Unenroll
+                                        Enroll
                                     </button>
-                                </div>
-                                ) : (
-                                <button
-                                    className="btn btn-success ms-1 float-end"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        dispatch(enrollCourse({ 
-                                            user: currentUser._id, 
-                                            course: course._id 
-                                        }))
-                                    }}
-                                >
-                                    Enroll
-                                </button>
                                 )}
                             </ProtectedRouteStudent>
                         </div>
